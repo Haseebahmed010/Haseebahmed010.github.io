@@ -10,13 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400..800&display=swap" rel="stylesheet"/>
 <style>
-/* ══════════════════════════════════════════════════════════════
-   Built in the language of bepatrickdavid.com, not copied from it.
-   Devices: ink/cream inversion, a condensed display face set huge
-   in uppercase, outlined marquee bands, per-element parallax,
-   counters, clip-path reveals, and a persistent canvas field.
-   Motion engine is written inline — no CDN, per the single-file rule.
-   ══════════════════════════════════════════════════════════════ */
+
 :root{
   --ink:#131313;
   --ink-2:#191919;
@@ -49,15 +43,10 @@ a{color:inherit;text-decoration:none}
 ::selection{background:var(--cream);color:var(--ink)}
 .wrap{padding-inline:var(--pad);max-width:2000px;margin-inline:auto;width:100%}
 
-/* the field sits behind every section, not just the hero */
 #field{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.62}
-/* Elements waiting to slide in sit up to 70px outside the viewport, which
-   would add a horizontal scrollbar. `clip` removes it without creating a
-   scroll container the way `hidden` would. The fixed nav and canvas live
-   outside this element, so nothing positioned gets clipped. */
+
 .layer{position:relative;z-index:1;overflow-x:clip}
 
-/* ── type ── */
 .kill{
   font-family:var(--display);
   font-size:clamp(3rem,min(16vw,19vh),15rem);
@@ -71,7 +60,6 @@ a{color:inherit;text-decoration:none}
 .serif{font-family:var(--serif);font-style:italic;color:var(--warm);font-size:clamp(1.25rem,2.6vw,2.25rem);line-height:1.1}
 .label{font-size:.75rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
 
-/* ══════════════ NAV ══════════════ */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:90;
   display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
@@ -85,12 +73,11 @@ a{color:inherit;text-decoration:none}
 .nav-links a::after{content:'';position:absolute;left:0;bottom:-3px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
 .nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
 
-/* ══════════════ HERO — anchored to the baseline, never floated ══════════════ */
 .hero{
   position:relative;
   min-height:100svh;
   display:grid;
-  grid-template-rows:auto 1fr auto;   /* top pinned · space · type on the floor */
+  grid-template-rows:auto 1fr auto;
   padding-top:clamp(4.5rem,9vh,6.5rem);
   padding-bottom:1.5rem;
 }
@@ -101,7 +88,7 @@ a{color:inherit;text-decoration:none}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--warm);flex:none;animation:blink 2.4s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-.hero-floor{align-self:end}          /* the headline sits on the floor of the screen */
+.hero-floor{align-self:end}
 .hero-serif{margin-bottom:.15em}
 .hero-rule{height:1px;background:var(--hair-2);margin-top:clamp(1rem,2.5vh,1.75rem);transform:scaleX(0);transform-origin:left}
 .go .hero-rule{animation:drawRule 1.1s var(--ease) .5s forwards}
@@ -115,7 +102,6 @@ a{color:inherit;text-decoration:none}
 .cue i{display:block;width:36px;height:1px;background:currentColor;transform-origin:left;animation:pull 2s var(--ease) infinite}
 @keyframes pull{0%{transform:scaleX(0)}55%{transform:scaleX(1)}100%{transform:scaleX(0);transform-origin:right}}
 
-/* ══════════════ MARQUEE ══════════════ */
 .band{display:flex;overflow:hidden;border-block:1px solid var(--hair);padding-block:.85rem;background:rgba(19,19,19,.55)}
 .band-track{display:flex;flex:none;gap:2.25rem;padding-right:2.25rem;animation:slide 30s linear infinite;will-change:transform}
 .band--rev .band-track{animation-direction:reverse}
@@ -125,18 +111,15 @@ a{color:inherit;text-decoration:none}
 .band i{font-family:var(--display);font-style:normal;font-size:clamp(1.375rem,3.1vw,2.5rem);text-transform:uppercase;white-space:nowrap;line-height:1.05}
 .band i:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--dim)}
 
-/* ══════════════ SECTIONS ══════════════ */
 .sec{padding-block:clamp(4.5rem,11vh,10rem)}
 .sec-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:.75rem 1.5rem;margin-bottom:clamp(2rem,5vh,3.5rem)}
 .sec-top .label{margin-left:auto}
 
-/* ── ABOUT: photo and text are ONE composition ── */
 .about{display:grid;grid-template-columns:1fr;gap:clamp(1.75rem,4vw,3.5rem);align-items:start}
 .shot{position:relative;overflow:hidden;background:var(--ink-2);aspect-ratio:1/1.22;width:100%}
 .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 42%;filter:grayscale(1) contrast(1.14);transition:filter .6s var(--ease)}
 .shot:hover img{filter:grayscale(0) contrast(1.02)}
-/* The curtain only exists once JS is running. Without this gate a
-   failed script leaves it at scaleY(1), hiding the photo for good. */
+
 .js .shot::after{content:'';position:absolute;inset:0;background:var(--cream);transform-origin:bottom;transform:scaleY(1)}
 .js .shot.in::after{animation:curtain 1.15s var(--ease) forwards}
 @keyframes curtain{to{transform:scaleY(0)}}
@@ -145,7 +128,6 @@ a{color:inherit;text-decoration:none}
 .shot.no-img .fallback{display:grid}
 .shot figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;justify-content:space-between;gap:1rem;padding:.85rem 1rem;font-size:.6875rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(to top,rgba(19,19,19,.92),transparent)}
 
-/* the serif name sits directly under the heading, as its caption */
 .about-name{margin-top:.35rem}
 .about-say{margin-top:clamp(1.5rem,3.5vh,2.5rem);font-size:clamp(1rem,1.35vw,1.1875rem);font-weight:500;text-transform:uppercase;line-height:1.45;max-width:42ch}
 .about-say em{font-family:var(--serif);font-style:italic;text-transform:none;font-size:1.2em;color:var(--warm)}
@@ -155,7 +137,6 @@ a{color:inherit;text-decoration:none}
 .count b{display:block;font-family:var(--display);font-size:clamp(2rem,4vw,3.25rem);line-height:1;letter-spacing:-.02em}
 .count span{font-size:.6875rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:.35rem;display:block}
 
-/* ── SKILLS ── */
 .skills{border-top:1px solid var(--hair)}
 .skill{display:grid;grid-template-columns:1fr;gap:.5rem 2rem;padding-block:1.4rem;border-bottom:1px solid var(--hair);align-items:baseline;position:relative}
 .skill::before{content:'';position:absolute;inset:0;background:var(--cream);transform:scaleY(0);transform-origin:bottom;transition:transform .45s var(--ease)}
@@ -167,7 +148,6 @@ a{color:inherit;text-decoration:none}
 .skill:hover p,.skill:hover .tools{color:rgba(19,19,19,.7)}
 .skill .tools{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 
-/* ── WORK: each case carries its own detail ── */
 .case{
   position:relative;
   display:grid;grid-template-columns:1fr;gap:1rem 3rem;
@@ -177,7 +157,6 @@ a{color:inherit;text-decoration:none}
 }
 .case:last-of-type{border-bottom:1px solid var(--hair)}
 
-/* a warm rule sweeps the full width of the row on hover */
 .case::after{
   content:'';position:absolute;left:0;right:0;top:-1px;height:1px;
   background:var(--warm);
@@ -186,7 +165,6 @@ a{color:inherit;text-decoration:none}
 }
 .case:hover::after{transform:scaleX(1)}
 
-/* alternating entrance: odd rows arrive from the left, even from the right */
 .case > *{opacity:0;transition:opacity .85s var(--ease), transform 1s var(--ease)}
 .case:nth-of-type(odd) > *{transform:translateX(-64px)}
 .case:nth-of-type(even) > *{transform:translateX(64px)}
@@ -198,7 +176,6 @@ a{color:inherit;text-decoration:none}
 .case:hover .case-name svg{transform:translate(6px,-6px)}
 .case-desc{font-size:1rem;color:var(--dim);max-width:58ch;margin-top:.75rem}
 
-/* bullet detail — each line arrives on its own beat */
 .points{list-style:none;margin-top:1.1rem;display:flex;flex-direction:column;gap:.5rem}
 .points li{
   position:relative;padding-left:1.35rem;
@@ -235,7 +212,7 @@ a{color:inherit;text-decoration:none}
 .case-figs{display:flex;flex-wrap:wrap;gap:1.25rem 2rem}
 .figv b{display:block;font-family:var(--display);font-size:clamp(1.25rem,2.4vw,2rem);line-height:1.05;color:var(--warm)}
 .figv span{font-size:.6875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
-/* ── EXPERIENCE ── */
+
 .post{display:grid;grid-template-columns:1fr;gap:1rem 3rem;align-items:start;border-top:1px solid var(--hair);padding-block:clamp(2rem,4vh,3rem)}
 .post-role{font-family:var(--display);font-size:clamp(1.5rem,3.4vw,2.75rem);text-transform:uppercase;line-height:.98;font-weight:400;letter-spacing:-.02em}
 .post-org{color:var(--warm);font-weight:600;margin-top:.35rem}
@@ -269,7 +246,6 @@ a{color:inherit;text-decoration:none}
   animation:spinBorder 4s linear infinite;
 }
 
-/* ── CTA ── */
 .cta{padding-block:clamp(4rem,9vh,8rem);text-align:center}
 .mail{
   display:inline-block;font-family:var(--display);
@@ -284,38 +260,26 @@ a{color:inherit;text-decoration:none}
 }
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem 2rem;padding-block:2rem;border-top:1px solid var(--hair);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 
-/* ══════════════ SCROLL ENGINE ══════════════ */
-/* word-split rise, applied to anything marked data-split */
 .w{display:inline-block;overflow:hidden;vertical-align:top}
 .w>span{display:inline-block;transform:translateY(105%)}
 .in .w>span,.w.in>span{transform:none;transition:transform .95s var(--ease)}
 
-/* generic reveal — direction set per element.
-   --dy flips when the reader is scrolling up, so content drops in from
-   above instead of rising from below. left/right/pop set transform
-   outright, so they ignore it. */
 [data-anim]{opacity:0;transform:translateY(var(--dy,30px))}
 [data-anim][data-from="up"]{--dy:-30px}
 [data-anim="left"]{transform:translateX(-70px)}
 [data-anim="right"]{transform:translateX(70px)}
 [data-anim="pop"]{transform:scale(.9)}
-/* :not(.in) is load-bearing — without it this ties with `.in .w>span`
-   on specificity (0-2-1) and, coming later, wins permanently, leaving
-   every word stranded off-screen once it enters on an upward scroll. */
+
 [data-from="up"]:not(.in) .w>span{transform:translateY(-105%)}
 [data-anim].in{
   opacity:1;transform:none;
   transition:opacity .9s var(--ease),transform 1s var(--ease);
 }
 
-/* wipe used on case rows */
 [data-wipe]{clip-path:inset(0 100% 0 0)}
 [data-wipe].in{animation:wipe 1s var(--ease) forwards}
 @keyframes wipe{to{clip-path:inset(0 0 0 0)}}
 
-/* ══════════════ GLOWING BORDERS ══════════════
-   The angle is a registered custom property so the conic gradient can
-   actually be animated — without @property it snaps instead of sweeping. */
 @property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
 @keyframes spinBorder{to{--a:360deg}}
 
@@ -335,7 +299,7 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 0 22px -6px rgba(243,219,199,.4), inset 0 0 18px -12px rgba(243,219,199,.5);
   color:var(--warm);
 }
-/* filled variant keeps its cream face and glows outward */
+
 .glow-fill{
   background:
     linear-gradient(var(--cream),var(--cream)) padding-box,
@@ -367,10 +331,6 @@ a{color:inherit;text-decoration:none}
   .about{grid-template-columns:minmax(0,26rem) minmax(0,1fr)}
 }
 
-/* Owner's explicit call, stated repeatedly: motion runs for everyone.
-   The OS reduced-motion flag is deliberately not honoured here, so only
-   parallax (the one vestibular-risk effect) is dropped for that group.
-   Everything else — ambient field, reveals, marquees — always plays. */
 @media (prefers-reduced-motion:reduce){
   [data-speed]{transform:none !important}
 }
@@ -428,7 +388,6 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
-<!-- ═══ ABOUT ═══ -->
 <section class="sec wrap" id="about">
   <div class="about">
     <figure class="shot" id="shot" data-speed="3">
@@ -466,7 +425,6 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
-<!-- ═══ SKILLS ═══ -->
 <section class="sec wrap" id="skills">
   <div class="sec-top">
     <h2 class="big" data-split>What I do</h2>
@@ -483,7 +441,6 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- ═══ WORK ═══ -->
 <section class="sec wrap" id="work">
   <div class="sec-top">
     <h2 class="big" data-split>Selected cases</h2>
@@ -593,7 +550,6 @@ a{color:inherit;text-decoration:none}
   </a>
 </section>
 
-<!-- ═══ EXPERIENCE ═══ -->
 <section class="sec wrap" id="experience">
   <div class="sec-top">
     <h2 class="big" data-split>Where the work happened</h2>
@@ -651,14 +607,13 @@ a{color:inherit;text-decoration:none}
   <span>Rahim Yar Khan, Pakistan</span>
 </footer>
 
-</div><!-- /.layer -->
+</div>
 
 <script>
 "use strict";
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-document.body.classList.add('js');   // gates the photo curtain
+document.body.classList.add('js');
 
-/* ── date + clock ── */
 const d = new Date();
 document.getElementById('day').textContent = String(d.getDate()).padStart(2,'0');
 document.getElementById('mon').textContent = d.toLocaleString('en-GB',{month:'short'}).toUpperCase();
@@ -667,7 +622,6 @@ const tick = () => clock.textContent = new Intl.DateTimeFormat('en-GB',
   {hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Karachi'}).format(new Date()) + ' PKT';
 tick(); setInterval(tick, 30000);
 
-/* ── portrait fallback ── */
 (() => {
   const img = document.querySelector('.shot img');
   const mark = () => document.getElementById('shot').classList.add('no-img');
@@ -675,9 +629,6 @@ tick(); setInterval(tick, 30000);
   img.addEventListener('error', mark);
 })();
 
-/* ── split headings into per-word masks ─────────────────────────
-   Words, not characters: characters break screen-reader output and
-   wrap badly at these sizes. <br> is preserved. */
 document.querySelectorAll('[data-split]').forEach(el => {
   const out = [];
   el.childNodes.forEach(node => {
@@ -691,15 +642,8 @@ document.querySelectorAll('[data-split]').forEach(el => {
   el.innerHTML = out.join('');
 });
 
-/* ── one observer drives every reveal ─────────────────────────────
-   A high threshold can be jumped clean over by fast scrolling, an
-   anchor link, or scroll restoration, and IntersectionObserver never
-   reports again — leaving content invisible for good. So: a near-zero
-   threshold, plus a catch-up sweep that reveals anything already past
-   the fold. */
 const TARGETS = '[data-split],[data-anim],[data-wipe],.shot,.case';
 
-/* which way the reader is travelling — decides where things enter from */
 let lastY = scrollY, dir = 'down';
 addEventListener('scroll', () => {
   const y = scrollY;
@@ -711,11 +655,11 @@ function stagger(el) {
   if (el.classList.contains('counts')) {
     el.querySelectorAll('.count').forEach((c, i) => c.style.transitionDelay = (i * 70) + 'ms');
   }
-  // the three columns of a project row arrive one after another
+
   if (el.classList.contains('case')) {
     el.querySelectorAll(':scope > *').forEach((col, i) => col.style.transitionDelay = (i * 110) + 'ms');
   }
-  // then the bullets cascade
+
   el.querySelectorAll('.points li').forEach((li, i) => {
     const d = 380 + i * 110;
     li.style.transitionDelay = d + 'ms';
@@ -725,18 +669,16 @@ function stagger(el) {
 
 function show(el) {
   if (el.classList.contains('in')) return;
-  el.dataset.from = dir;      // enters from the top when scrolling back up
+  el.dataset.from = dir;
   stagger(el);
   el.classList.add('in');
 }
 
-/* Reset once an element is fully clear of the viewport so it plays again
-   on the way back. Resetting while it is still partly visible would flicker. */
 function hide(el) {
   if (!el.classList.contains('in')) return;
   el.classList.remove('in');
   el.querySelectorAll('[data-count-to]').forEach(c => {
-    cancelAnimationFrame(c._raf);   // stop the old loop racing the next one
+    cancelAnimationFrame(c._raf);
     counted.delete(c);
     c.textContent = '0' + (c.dataset.suffix || '');
     cio.observe(c);
@@ -764,25 +706,18 @@ function catchUp() {
 let cuT;
 addEventListener('scroll', () => { clearTimeout(cuT); cuT = setTimeout(catchUp, 120); }, { passive: true });
 
-/* The hero animates as soon as the DOM is parsed — waiting on `load`
-   meant waiting on the Google Fonts download, leaving the headline blank.
-   Two frames lets the browser paint the start state so the transition
-   plays, but rAF never fires in a background tab, which would leave the
-   whole page unrevealed. Hence the timeout and load fallbacks; boot is
-   idempotent so whichever wins, it runs exactly once. */
 function boot() {
   if (document.body.classList.contains('go')) return;
   document.body.classList.add('go');
   document.querySelectorAll('.hero [data-split],.hero [data-anim]').forEach(show);
-  catchUp();   // covers a reload that restores scroll position mid-page
+  catchUp();
 }
 requestAnimationFrame(() => requestAnimationFrame(boot));
 setTimeout(boot, 250);
 addEventListener('load', boot);
-/* a tab opened in the background reveals nothing until it is looked at */
+
 addEventListener('visibilitychange', () => { if (!document.hidden) { boot(); catchUp(); } });
 
-/* ── counters ── */
 const counted = new WeakSet();
 function runCount(el) {
   if (counted.has(el)) return;
@@ -796,9 +731,7 @@ function runCount(el) {
       el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))) + sfx;
       el._raf = requestAnimationFrame(step);
     } else {
-      /* land on the exact figure. Relying on the last eased frame left it
-         reading 69% whenever that frame was throttled or dropped, and these
-         are real claimed numbers. */
+
       el.textContent = to + sfx;
     }
   };
@@ -810,7 +743,6 @@ const cio = new IntersectionObserver((entries) => {
 }, { threshold: .25 });
 document.querySelectorAll('[data-count-to]').forEach(el => cio.observe(el));
 
-/* any counter already scrolled past must not be left reading zero */
 function fillCounters() {
   document.querySelectorAll('[data-count-to]').forEach(el => {
     if (counted.has(el)) return;
@@ -818,7 +750,6 @@ function fillCounters() {
   });
 }
 
-/* ── parallax ── */
 const par = [...document.querySelectorAll('[data-speed]')];
 let pt = false;
 addEventListener('scroll', () => {
@@ -836,9 +767,6 @@ addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-/* ── persistent point-cloud field, behind every section ─────────
-   Torus points rotated on two axes and projected. Drifts with
-   scroll so it reads as one continuous space down the whole page. */
 const cv = document.getElementById('field');
 const ctx = cv.getContext('2d');
 let pts = [], w = 0, h = 0, raf = 0;
@@ -864,16 +792,13 @@ function size() {
 function draw(t) {
   if (!w || !h) return;
   ctx.clearRect(0, 0, w, h);
-  /* Rotation is time-only. Mixing scroll into the angle meant scrolling
-     up subtracted from it at roughly the rate time added, so the field
-     visibly stalled. Scroll now only drifts the centre, which cannot
-     cancel the spin. */
+
   const a = t * .00024;
   const b = t * .00017;
   const ca = Math.cos(a), sa = Math.sin(a), cb = Math.cos(b), sb = Math.sin(b);
   const scale = Math.min(w, h) * .40;
   const prog = scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight);
-  const cx = w * (.74 - prog * .34);          // drifts left down the page
+  const cx = w * (.74 - prog * .34);
   const cy = h * (.46 + Math.sin(prog * 3.1) * .10);
 
   for (let i = 0; i < pts.length; i++) {
@@ -893,8 +818,6 @@ function draw(t) {
   ctx.globalAlpha = 1;
 }
 
-/* The field runs on its own clock, every frame, always. It is ambient,
-   so it must never depend on the visitor scrolling to move. */
 function loop(t) { draw(t); raf = requestAnimationFrame(loop); }
 addEventListener('resize', size, { passive: true });
 size();
